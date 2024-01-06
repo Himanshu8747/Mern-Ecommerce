@@ -4,6 +4,7 @@ const  Home = lazy(()=>import( "./pages/Home"));
 const  Search =  lazy(()=>import("./pages/Search"));
 const  Cart =  lazy(()=>import("./pages/Cart"));
 import Loader from "./component/Loader";
+import Header from "./component/Header";
 
 // Admin Routes Importing
 
@@ -29,7 +30,7 @@ const TransactionManagement = lazy(
 const App = () => {
   return (
     <Router>
-      {/* Header Component */}
+      <Header/>
       <Suspense fallback={<Loader/>}>
         <Routes>
           <Route path="/" element={<Home/>}/>
