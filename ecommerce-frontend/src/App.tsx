@@ -6,6 +6,8 @@ const  Cart =  lazy(()=>import("./pages/Cart"));
 import Loader from "./component/Loader";
 import Header from "./component/Header";
 import Login from "./pages/Login";
+import Orders from "./pages/Orders";
+import OrderDetails from "./pages/OrderDetails";
 const  Shipping =lazy(()=>import("./pages/Shipping"));  
 
 // Admin Routes Importing
@@ -41,7 +43,11 @@ const App = () => {
           {/* Not Logged in */}
           <Route path='/login' element={<Login/>}/>
           {/* Logged In User Routes */}
+          <Route>
           <Route path='/shipping' element={<Shipping/>}/>
+          <Route path="/orders" element={<Orders/>}/>
+          <Route path="/order/:id" element={<OrderDetails/>}/>
+          </Route>
 
 
           
