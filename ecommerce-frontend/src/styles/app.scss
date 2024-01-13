@@ -36,6 +36,8 @@
   @import "admin/mixin";
   @import "home";
   @import "cart.scss";
+  @import "shipping.scss";
+  @import "login.scss";
   @import "admin/dashboard";
   @import "admin/products";
   @import "admin/chart";
@@ -77,6 +79,12 @@
       @include flex(column,flex-start,center,0.25rem);
     }
   }
+}
+
+.heading{
+  @include heading;
+  margin: 1rem 0;
+  text-align: center;
 }
 
 
