@@ -32,5 +32,24 @@
             font-size: 1.2rem;
             display: block;
         }
+        .search-product-list{
+            @include flex(row,flex-start,flex-start);
+            flex-wrap: wrap;
+            height: calc(100% - 10rem);
+            overflow-y: auto;
+        }
+        article{
+            @include flex;
+            > button{
+                @include flex;
+                @include btn(0.5rem 1rem,$color3,$color1);
+                border-radius: 10px;
+                &:disabled{
+                    cursor: not-allowed;
+                    opacity: 0.5;
+                    color: $color2;
+                }
+            }
+        }
     }
 }
