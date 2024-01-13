@@ -38,6 +38,7 @@
   @import "cart.scss";
   @import "shipping.scss";
   @import "login.scss";
+  @import "search.scss";
   @import "admin/dashboard";
   @import "admin/products";
   @import "admin/chart";
@@ -84,7 +85,7 @@
 .heading{
   @include heading;
   margin: 1rem 0;
-  text-align: center;
+  text-align: center
 }
 
 
