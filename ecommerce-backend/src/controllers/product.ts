@@ -24,3 +24,11 @@ export const newProduct = TryCatch(
         success:true,message:"Product created successfully"
     })
 });
+export const getlatestProducts = TryCatch(async(req:Request<{},{},NewProductRequestBody>,res,next)=>{
+    // 1 = ascending -1= descending
+    const products = await Product.find({}).sort({createdAt:-1}).limit(5);
+    return res.status(200).json({
+        success:true,
+        products
+    })
+});
