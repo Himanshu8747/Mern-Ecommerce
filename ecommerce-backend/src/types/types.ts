@@ -20,3 +20,23 @@ export type ControllerType=(
     res:Response,
     next:NextFunction
 )=>Promise<void|Response<any,Record<string,any>>>;
+
+export type SearchRequestQuery={
+    search?:string;
+    price?:string,
+    category?:string;
+    sort?:string,
+    page?:string;
+}
+
+export interface baseQueryType {
+    name?:{
+        $regex:string,
+        $options:string,
+    },
+    price?:{
+        $lte:number
+    },
+    category?:string;
+
+}
