@@ -4,11 +4,15 @@ import productRoute from './routes/product.js';
 
 import { connectDB } from './utils/features.js';
 import { errorMiddleware } from './middlewares/error.js';
+import NodeCache from 'node-cache';
+
 
 const app = express();
 app.use(express.json());
 const PORT = 4000;
 connectDB();
+
+export const myCache = new NodeCache();
 
 app.get("/",(req,res)=>{
     res.send("API Working with /api/v1");
