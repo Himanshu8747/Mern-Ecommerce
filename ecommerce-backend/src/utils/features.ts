@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
-import { invalidateCacheProps } from '../types/types.js';
+import { OrderItemType, invalidateCacheProps } from '../types/types.js';
 import { Product } from '../models/product.js';
 import { myCache } from '../app.js';
+import { setUncaughtExceptionCaptureCallback } from 'process';
 
 export const connectDB=()=>{
     mongoose.connect("mongodb://localhost:27017",{
@@ -28,4 +29,17 @@ export const invalidateCache=async({product,order,admin}:invalidateCacheProps)=>
     if(admin){
 
     }
+}
+
+export const reduceStock=async(orderItems:OrderItemType[]) =>{
+    for (let i = 0; i< orderItems.length; i++) {
+       const order = orderItems[i];
+       const product = await Product.findById(order.productId);
+       if(!product){
+        throw new Error("Product not found !");
+       } 
+       product.stock-=order.quantity;
+       await product.save();
+    }
+
 }
