@@ -41,11 +41,14 @@ export interface baseQueryType {
 
 }
 
-export type invalidateCacheProps={
-    product?:boolean,
-    order?:boolean,
-    admin?:boolean,
-}
+export type InvalidateCacheProps = {
+    product?: boolean;
+    order?: boolean;
+    admin?: boolean;
+    userId?: string;
+    orderId?: string;
+    productId?: string | string[];
+  };
 
 export type OrderItemType = {
     name:string,

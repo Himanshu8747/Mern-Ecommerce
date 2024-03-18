@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { OrderItemType, invalidateCacheProps } from '../types/types.js';
 import { Product } from '../models/product.js';
 import { myCache } from '../app.js';
-import { setUncaughtExceptionCaptureCallback } from 'process';
+import { Order } from '../models/order.js';
 
 export const connectDB=()=>{
     mongoose.connect("mongodb://localhost:27017",{
@@ -24,7 +24,13 @@ export const invalidateCache=async({product,order,admin}:invalidateCacheProps)=>
         myCache.del(productKeys);
     }
     if(order){
+        const orderKeys:string[] = ['all-orders'];
+        const orders = await Order.find({}).select("_id");
+        orders.forEach(i => {
+            orderKeys.push(`order-${i._id}`);
+        });
 
+        myCache.del(orderKeys);
     }
     if(admin){
 
