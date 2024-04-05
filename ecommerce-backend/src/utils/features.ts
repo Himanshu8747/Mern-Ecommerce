@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { OrderItemType, invalidateCacheProps } from '../types/types.js';
+import { OrderItemType, InvalidateCacheProps } from '../types/types.js';
 import { Product } from '../models/product.js';
 import { myCache } from '../app.js';
 import { Order } from '../models/order.js';
@@ -11,9 +11,9 @@ export const connectDB=()=>{
     .catch((e)=>console.log(e));
 }
 
-export const invalidateCache=async({product,order,admin}:invalidateCacheProps)=>{
+export const invalidateCache=async({product,order,admin,productId}:InvalidateCacheProps)=>{
     if(product){
-        const productKeys:string[]=["latest-products","categories","all-products",""];
+        const productKeys:string[]=["latest-products","categories","all-products", `product-${productId}`];
         
         // for getSingle Product usig ID;
         const products = await Product.find({}).select("_id");
