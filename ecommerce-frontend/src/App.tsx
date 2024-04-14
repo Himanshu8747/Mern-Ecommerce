@@ -84,4 +84,6 @@ const App = () => {
   )
 }
 
+// Firebase wala chal nahi raha hai wo karna hai ! last me 
+
 export default App
