@@ -11,6 +11,7 @@ import NodeCache from 'node-cache';
 import { config } from 'dotenv';
 import morgan from 'morgan';
 import Stripe from "stripe";
+import cors from 'cors'
 
 const app = express();
 config({
@@ -18,6 +19,7 @@ config({
 })
 app.use(express.json());
 app.use(morgan("dev"));
+app.use(cors());
 
 const PORT =process.env.PORT ||4000;
 const mongoURI = process.env.MONGO_URI || "";
