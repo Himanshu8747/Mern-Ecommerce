@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { lazy,Suspense } from "react";
+import { lazy,Suspense, useEffect } from "react";
 const  Home = lazy(()=>import( "./pages/Home"));
 const  Search =  lazy(()=>import("./pages/Search"));
 const  Cart =  lazy(()=>import("./pages/Cart"));
@@ -10,6 +10,12 @@ import Orders from "./pages/Orders";
 import OrderDetails from "./pages/OrderDetails";
 const  Shipping =lazy(()=>import("./pages/Shipping"));  
 import {Toaster} from 'react-hot-toast'
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
+import { userExist,userNotExist} from "./redux/reducer/userReducer";
+import { useDispatch,useSelector } from "react-redux";
+import { UserReducerInitialState } from "./types/reducer-types";
+import { getUser } from "./redux/api/userAPI";
 // Admin Routes Importing
 
 const Dashboard = lazy(() => import("./pages/admin/dashboard"));
@@ -32,9 +38,26 @@ const TransactionManagement = lazy(
 
 
 const App = () => {
-  return (
+  const { user, loading } = useSelector(
+    (state:{userReducer:UserReducerInitialState}) => state.userReducer
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const data = await getUser(user.uid);
+        dispatch(userExist(data.user));
+      } else dispatch(userNotExist());
+    });
+  }, []);
+
+    return loading ? (
+      <Loader />
+    ) : (
     <Router>
-      <Header/>
+      <Header user={user}/>
       <Suspense fallback={<Loader/>}>
         <Routes>
           <Route path="/" element={<Home/>}/>
@@ -80,7 +103,7 @@ const App = () => {
         </Routes>
       </Suspense>
       <Toaster position="bottom-center"/>
-    </Router>
+    </Router> 
   )
 }
 
