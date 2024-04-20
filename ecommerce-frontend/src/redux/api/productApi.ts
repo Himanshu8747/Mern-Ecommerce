@@ -81,4 +81,6 @@ export const {
   useSearchProductsQuery,
   useNewProductMutation,
   useProductDetailsQuery,
+  useDeleteProductMutation,
+  useUpdateProductMutation
 } = productAPI;
