@@ -1,4 +1,4 @@
-# MERN E-COMMERCE SERVER 2024
+# MERN E-COMMERCE Frontend 2024
 
 Hi! My name is **Himanshu Javiya**.
 
